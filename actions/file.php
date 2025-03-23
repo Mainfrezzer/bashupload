@@ -34,15 +34,24 @@ if ( !$_GET['download'] && $renderer == 'html' ) {
 # direct download
 else if ( $file['size'] )
 {
-  file_put_contents($download_mark_file, $downloads + 1);
-  
-	header('Content-type: ' . system_extension_mime_type($file['name']));
-	header('Content-Disposition: attachment; filename=' . $file['name']); 
-	header('Content-Transfer-Encoding: binary');
-	header('Content-Length: ' . $file['size']);
-	header('X-Accel-Redirect: /files/' . md5($file['path']));
-	readfile($file_path);
-	exit;
+    file_put_contents($download_mark_file, $downloads + 1);
+    
+    header('Content-Type: ' . system_extension_mime_type($file['name']));
+    header('Content-Disposition: attachment; filename=' . $file['name']); 
+    header('Content-Transfer-Encoding: binary');
+    header('Content-Length: ' . $file['size']);
+    header('X-Accel-Redirect: /files/' . md5($file['path']));
+    $fp = fopen($file_path, 'rb');
+        if (ob_get_level()) {
+            ob_end_clean();
+        }
+        $chunkSize = 8192;
+        while (!feof($fp)) {
+            echo fread($fp, $chunkSize);
+            flush();
+        }
+        fclose($fp);
+    exit;
 }
 
 # no file found
