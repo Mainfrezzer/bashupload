@@ -7,7 +7,7 @@
 # Get system MIME types list
 function system_extension_mime_types() {
     $out = array();
-    $file = fopen('/etc/mime.types', 'r');
+    $file = fopen('/etc/apache2/mime.types', 'r');
     
     while(($line = fgets($file)) !== false) {
         $line = trim(preg_replace('/#.*/', '', $line));

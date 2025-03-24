@@ -9,7 +9,7 @@ if ( $f = fopen('php://input', 'r') )
 {
 	$name = trim($uri, '/');
 	if ( !$name ) $name = uniqid();
-	$tmp = tempnam('/var/files/tmp', 'upload');
+	$tmp = tempnam('/app/files/tmp', 'upload');
 
 	$ftmp = fopen($tmp, 'w');
 	while ( !feof($f) ) fputs($ftmp, fgets($f));
