@@ -29,9 +29,16 @@ else {
     }
   }
   
+  # check for custom pages that might be available
+  $uri_trim = rtrim($uri, '/');
+  $uri_handler = __DIR__ . "/../actions/{$uri_trim}.php";
+  if ( is_file($uri_handler) ) {
+    $action = $uri_trim;
+  }else{
   # everything else is a possible file to download
   if ( !$doc && ($uri != '/') ) {
     $action = 'file';
+  }
   }
 }
 
