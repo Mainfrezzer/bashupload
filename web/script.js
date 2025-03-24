@@ -72,7 +72,6 @@ function upload_files(files) {
 function uploading() {
 	var elements = document.getElementsByClassName('uploading');
 	for ( var i = 0; i < elements.length; i++ ) {
-		if (elements[i].innerText == 'Failed :(' ) return;
 		if ( elements[i].innerText == 'Uploading...' ) elements[i].innerText = 'Uploading';
 		else if ( elements[i].innerText == 'Uploading' ) elements[i].innerText = 'Uploading.';
 		else if ( elements[i].innerText == 'Uploading.' ) elements[i].innerText = 'Uploading..';
