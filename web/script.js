@@ -63,6 +63,7 @@ function upload_files(files) {
 		var elements = document.getElementsByClassName('uploading');
 		for ( var i = 0; i < elements.length; i++ ) {
 			elements[i].innerText = 'Failed :(';
+			elements[i].classList.remove('uploading');
 		}
 	});
 }
