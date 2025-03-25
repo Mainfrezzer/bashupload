@@ -7,8 +7,11 @@ if ( (basename(__FILE__) != 'config.local.php') && is_file(__DIR__ . '/config.lo
   require __DIR__ . '/config.local.php';
   return;
 }
+# To overwrite the title
+$title = null;
 
-
+# To overwrite the meta tag
+$description = null;
 
 # where files will recide (make sure it has writable permissions)
 define('STORAGE', '/app/files');
