@@ -14,7 +14,7 @@
   	<a id=choosefile href="javascript:document.getElementById('inputfile').click();">choose file(s)</a>
   	<span class="aslo">to upload</span>
   	
-  	<?php if ( $has_docs ) { ?>
+  	<?php if ( isset($has_docs) ) { ?>
   	  <a href="/how_to_upload_file_to_server" title="Uploading to a server through cli">or read more docs</a>
   	<?php } ?>
   </p>
