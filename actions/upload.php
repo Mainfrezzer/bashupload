@@ -43,11 +43,11 @@ foreach ( $_FILES as $key_file => $file )
 
   # register this uploaded file data
 	$uploads[] = [
-		'id' => ($rewrite_id ? : $id),
+		'id' => (isset($rewrite_id) ? : $id),
 		'name' => $file['name'],
 		'path' => $destination,
 		'size' => filesize($destination),
 		'upload_name' => $key_file,
-		'is_rewritten' => $rewrite_id ? true : false
+		'is_rewritten' => isset($rewrite_id) ? true : false
 	];
 }

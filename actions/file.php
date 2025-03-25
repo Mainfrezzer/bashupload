@@ -27,7 +27,7 @@ $title = htmlspecialchars($file['name']) . ' / download from bashupload.com';
 
 
 # render
-if ( !$_GET['download'] && $renderer == 'html' ) {
+if ( !array_key_exists('download', $_GET) && $renderer == 'html' ) {
   $sorry = !$file['size'];
 }
 

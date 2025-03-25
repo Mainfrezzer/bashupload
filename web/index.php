@@ -46,7 +46,7 @@ else {
 
 # Execute routed handler
 $accept = explode(',', $_SERVER['HTTP_ACCEPT']);
-if ( $_POST['json'] == 'true' ) $renderer = 'json';
+if (array_key_exists('json', $_POST)) $renderer = 'json';
 else if ( in_array('text/html', $accept) ) $renderer = 'html';
 else $renderer = 'txt';
 
