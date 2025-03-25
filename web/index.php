@@ -36,7 +36,7 @@ else {
     $action = $uri_trim;
   }else{
   # everything else is a possible file to download
-  if ( !$doc && ($uri != '/') ) {
+  if ( !isset($doc) && ($uri != '/') ) {
     $action = 'file';
   }
   }
