@@ -5,6 +5,7 @@
 
 
 # file stats
+$uri = rawurldecode($uri);
 $file = explode('/', trim($uri, '/'));
 $file = ['id' => $file[0], 'name' => $file[1], 'path' => '/' . $file[0] . '-' . $file[1], 'extension' => strtolower(pathinfo($file[1], PATHINFO_EXTENSION))];
 

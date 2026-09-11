@@ -29,25 +29,34 @@ if ( $f = fopen('php://input', 'r') )
 $id = gen_id();
 foreach ( $_FILES as $key_file => $file )
 {
-  # make file name safe
-	$file['name'] = str_replace(['/', '-'], '_', trim($file['name'], '/'));
-	
-	# if the file name is too long, let's just replace it with random short ID
-	if ( strpos($file['name'], ' ') || strlen($file['name']) > 15 ) {
-		$file['name'] = gen_id() . '.' . pathinfo($file['name'], PATHINFO_EXTENSION);
-	}
+# make file name safe
+$file['name'] = trim($file['name'], '/');
+$file['name'] = str_replace(['/', '\\'], '_', $file['name']);
 
-  # move file to a final location
-	$destination = STORAGE . '/' . md5('/' . $id . '-' . $file['name']);
-	rename($file['tmp_name'], $destination);
+# Only generate a new name if the filename is extremely long
+# Keep the original extension when renaming.
+if (strlen($file['name']) > 255) {
+    $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
 
-  # register this uploaded file data
-	$uploads[] = [
-		'id' => (isset($rewrite_id) ? : $id),
-		'name' => $file['name'],
-		'path' => $destination,
-		'size' => filesize($destination),
-		'upload_name' => $key_file,
-		'is_rewritten' => isset($rewrite_id) ? true : false
-	];
+    $file['name'] = gen_id();
+
+    if ($extension !== '') {
+        $file['name'] .= '.' . $extension;
+    }
+}
+
+# move file to a final location
+$destination = STORAGE . '/' . md5('/' . $id . '-' . $file['name']);
+rename($file['tmp_name'], $destination);
+
+# register this uploaded file data
+$uploads[] = [
+    'id' => (isset($rewrite_id) ? : $id),
+    'name' => $file['name'],
+    'path' => $destination,
+    'size' => filesize($destination),
+    'upload_name' => $key_file,
+    'is_rewritten' => isset($rewrite_id) ? true : false
+];
+
 }
