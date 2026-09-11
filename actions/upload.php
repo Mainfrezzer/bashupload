@@ -7,7 +7,7 @@
 # First, let's check raw input data
 if ( $f = fopen('php://input', 'r') )
 {
-	$name = trim($uri, '/');
+	$name = rawurldecode(trim($uri, '/'));
 	if ( !$name ) $name = uniqid();
 	$tmp = tempnam('/app/files/tmp', 'upload');
 
